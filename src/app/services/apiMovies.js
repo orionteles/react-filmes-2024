@@ -6,7 +6,7 @@ const apiMovie = axios.create({
         language: 'pt-BR'
     },
     headers: {
-        Authorization: 'Bearer ' + process.env.API_KEY
+        Authorization: 'Bearer ' + process.env.NEXT_PUBLIC_API_KEY
     }
 })
 
