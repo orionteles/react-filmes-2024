@@ -8,36 +8,36 @@ import Link from "next/link";
 
 export default function Page({ params }) {
 
-    const [filme, setFilme] = useState({})
+    const [serie, setSerie] = useState({})
     const [atores, setAtores] = useState([])
 
     useEffect(() => {
-        apiMovie.get(`movie/${params.id}`).then(resultado => {
-            setFilme(resultado.data)
+        apiMovie.get(`tv/${params.id}`).then(resultado => {
+            setSerie(resultado.data)
         })
 
-        apiMovie.get(`movie/${params.id}/credits`).then(resultado => {
+        apiMovie.get(`tv/${params.id}/credits`).then(resultado => {
             setAtores(resultado.data.cast)
         })
     }, [])
 
     return (
-        <Pagina titulo={filme.title}>
+        <Pagina titulo={serie.name}>
             {
-                filme.id &&
+                serie.id &&
                 <Row className="mt-3">
                     <Col sm={4}>
-                        <img className="img-fluid" src={'https://image.tmdb.org/t/p/w500/' + filme.poster_path} />
+                        <img className="img-fluid" src={'https://image.tmdb.org/t/p/w500/' + serie.poster_path} />
                     </Col>
                     <Col sm={8}>
-                        <p><b>Título original: </b>{filme.original_title}</p>
-                        <p><b>Popularidade: </b>{filme.popularity}</p>
-                        <p><b>Data de Lançamento: </b>{filme.release_date}</p>
-                        <p><b>Orçamento: </b>{filme.budget}</p>
+                        <p><b>Título original: </b>{serie.original_name}</p>
+                        <p><b>Popularidade: </b>{serie.popularity}</p>
+                        <p><b>Data de Lançamento: </b>{serie.release_date}</p>
+                        <p><b>Orçamento: </b>{serie.budget}</p>
                         <p><b>Gêneros: </b>
-                            {filme.genres.map(item => item.name).join(', ')}
+                            {serie.genres.map(item => item.name).join(', ')}
                         </p>
-                        <p><b>Sinopse: </b>{filme.overview}</p>
+                        <p><b>Sinopse: </b>{serie.overview}</p>
                     </Col>
                     <Col sm={12}>
                         <h1>Atores</h1>
