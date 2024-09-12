@@ -32,12 +32,29 @@ export default function Page({ params }) {
                     <Col sm={8}>
                         <p><b>Título original: </b>{serie.original_name}</p>
                         <p><b>Popularidade: </b>{serie.popularity}</p>
-                        <p><b>Data de Lançamento: </b>{serie.release_date}</p>
-                        <p><b>Orçamento: </b>{serie.budget}</p>
+                        <p><b>Data de Lançamento: </b>{serie.first_air_date}</p>
+                        <p><b>Temporadas: </b>{serie.seasons.length}</p>
                         <p><b>Gêneros: </b>
                             {serie.genres.map(item => item.name).join(', ')}
                         </p>
                         <p><b>Sinopse: </b>{serie.overview}</p>
+                    </Col>
+                    <Col sm={12}>
+                        <h1>Temporadas</h1>
+                        <Row>
+                            {serie.seasons.map(item => (
+                                <Col
+                                    key={item.id}
+                                    title={item.name}
+                                    className="mb-3"
+                                    sm={2}
+                                >
+                                    <Link href={`/series/${serie.id}/temporada/${item.season_number}`}>
+                                        <img className="img-fluid" src={'https://image.tmdb.org/t/p/w500/' + item.poster_path} />
+                                    </Link>
+                                </Col>
+                            ))}
+                        </Row>
                     </Col>
                     <Col sm={12}>
                         <h1>Atores</h1>
