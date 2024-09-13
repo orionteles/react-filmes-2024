@@ -20,6 +20,7 @@ export default function Page() {
         {
           original: 'https://image.tmdb.org/t/p/w500' + item.backdrop_path,
           thumbnail: 'https://image.tmdb.org/t/p/w200' + item.backdrop_path,
+          originalTitle: item.title,
         }
       ))
 
@@ -32,6 +33,7 @@ export default function Page() {
         {
           original: 'https://image.tmdb.org/t/p/w500' + item.backdrop_path,
           thumbnail: 'https://image.tmdb.org/t/p/w200' + item.backdrop_path,
+          originalTitle: item.name,
         }
       ))
 
@@ -44,6 +46,7 @@ export default function Page() {
         {
           original: 'https://image.tmdb.org/t/p/w500' + item.profile_path,
           thumbnail: 'https://image.tmdb.org/t/p/w200' + item.profile_path,
+          originalTitle: item.name,
         }
       ))
 
