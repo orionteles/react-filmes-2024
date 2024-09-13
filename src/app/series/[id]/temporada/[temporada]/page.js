@@ -11,6 +11,7 @@ export default function Page({ params }) {
     console.log(params)
 
     const [show, setShow] = useState(false);
+    const [episodio, setEpisodio] = useState({});
     const [temporada, setTemporada] = useState({})
 
     useEffect(() => {
@@ -19,6 +20,11 @@ export default function Page({ params }) {
         })
 
     }, [])
+
+    function exibirModal(item){
+        setEpisodio(item)
+        setShow(true)
+    }
 
     return (
         <Pagina titulo={temporada.name}>
@@ -35,11 +41,11 @@ export default function Page({ params }) {
                         <p><b>Sinopse: </b>{temporada.overview}</p>
                     </Col>
                     <Col sm={12}>
-                        <h1>Temporadas</h1>
+                        <h1>Episódios</h1>
                         <Row md={3}>
                             {temporada.episodes.map(item => (
                                 <Col key={item.id} className="mt-3">
-                                    <Card onClick={()=>setShow(true)}>
+                                    <Card onClick={()=>exibirModal(item)}>
                                         <Card.Img height={150} variant="top" src={'https://image.tmdb.org/t/p/w500/' + item.still_path} />
                                         <Card.Body>
                                             <Card.Text>{item.name}</Card.Text>
@@ -54,12 +60,15 @@ export default function Page({ params }) {
            
             <Modal show={show} onHide={()=>setShow(false)}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Piloto</Modal.Title>
+                    <Modal.Title>{episodio.name}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <div>
-                        <img className="img-fluid" src={'https://image.tmdb.org/t/p/w500/rNSbjHqJRad3nXZr84zoGyDR0oM.jpg'} />
-                        <p>Olá Mundo rt one of the series premiere, Harrison Wilson accepts the job position as principal of West Beverly Hills High,  forcing the Wilson family to relocate from Kansas to California and adjust to new life in the city - all while keeping a close watch on their troubled grandmother Tabitha.</p>
+                        <img className="img-fluid mb-3" src={'https://image.tmdb.org/t/p/w500/' + episodio.still_path} />
+                        <p><b>Episódio: </b>{episodio.episode_number}</p>
+                        <p><b>Duração: </b>{episodio.runtime} min.</p>
+                        <p><b>Voto: </b>{episodio.vote_average}</p>
+                        <p>{episodio.overview}</p>
                     </div>
                 </Modal.Body>
                 <Modal.Footer>
